@@ -49,10 +49,10 @@ public extension Font {
             return Font(name: fontName, size: size)!
         }
         guard let fontUrl = fontPath else {
-            FontLoader.loadFont(from: fontPath)
+            FontLoader.loadFont(fontName)
             return Font(name: fontName, size: size)!
         }
-        FontLoader.loadFont(fontName)
+        FontLoader.loadFont(from: fontUrl)
         return Font(name: fontName, size: size)!
     }
     #elseif os(OSX)
