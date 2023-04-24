@@ -11,19 +11,12 @@ import UIKit
 
 public extension UIImage {
     
-    convenience init(from fontName: String, code: String, textColor: Color = .black, backgroundColor: Color = .clear, size: CGSize, fontPath: URL? = nil) {
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .center
+    convenience init(fontName: String, code: String, color: Color = .black, backgroundColor: Color = .clear, size: CGSize, fontPath: URL? = nil) {
         
         let fontSize = min(size.width / 1.28571429, size.height)
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: Font.icon(from: fontName, ofSize: fontSize, fontPath: fontPath),
-            .foregroundColor: textColor,
-            .backgroundColor: backgroundColor,
-            .paragraphStyle: paragraphStyle
-        ]
         
-        let attributedString = NSAttributedString(string: code, attributes: attributes)
+        let attributedString = code.icon(fontName: fontName, color: color, backgroundColor: backgroundColor, fontSize: fontSize, fontPath: fontPath)
+        
         UIGraphicsBeginImageContextWithOptions(size, false , 0.0)
         attributedString.draw(in: CGRect(x: 0, y: (size.height - fontSize) * 0.5, width: size.width, height: fontSize))
         let image = UIGraphicsGetImageFromCurrentImageContext()
@@ -35,18 +28,9 @@ public extension UIImage {
             self.init()
         }
     }
-
-    static func icon(from fontName: String, iconColor: Color, code: String, imageSize: CGSize, ofSize size: CGFloat, fontPath: URL? = nil) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(imageSize, false, 0)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = NSTextAlignment.center
-        
-        code.draw(in: CGRect(x:0, y:0, width:imageSize.width, height:imageSize.height), withAttributes: [.font: Font.icon(from: fontName, ofSize: size, fontPath: fontPath), .paragraphStyle: paragraphStyle, .foregroundColor: iconColor])
-        
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return image!
+    
+    static func icon(fontName: String, code: String, color: Color = .black, backgroundColor: Color = .clear, size: CGSize, fontPath: URL? = nil) -> UIImage {
+        return UIImage(fontName: fontName, code: code, color: color, backgroundColor: backgroundColor, size: size, fontPath: fontPath)
     }
 }
 

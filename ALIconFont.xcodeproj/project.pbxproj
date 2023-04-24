@@ -12,6 +12,10 @@
 		737A7DEC29EEF73F0036854E /* ALIconFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A7DE629EEF73F0036854E /* ALIconFont.swift */; };
 		737A7DED29EEF73F0036854E /* NSImage+IconFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A7DE829EEF73F0036854E /* NSImage+IconFont.swift */; };
 		737A7DEE29EEF73F0036854E /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737A7DE929EEF73F0036854E /* Types.swift */; };
+		7381CA2C29F6CFD5000B47A5 /* String+IconFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7381CA2B29F6CFD5000B47A5 /* String+IconFont.swift */; };
+		7381CA3029F6D7C5000B47A5 /* UIImageView+IconFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7381CA2F29F6D7C5000B47A5 /* UIImageView+IconFont.swift */; };
+		7381CA3229F6DAA1000B47A5 /* UILabel+IconFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7381CA3129F6DAA1000B47A5 /* UILabel+IconFont.swift */; };
+		7381CA3429F6DAE0000B47A5 /* UIButton+IconFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7381CA3329F6DAE0000B47A5 /* UIButton+IconFont.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +25,10 @@
 		737A7DE629EEF73F0036854E /* ALIconFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ALIconFont.swift; sourceTree = "<group>"; };
 		737A7DE829EEF73F0036854E /* NSImage+IconFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+IconFont.swift"; sourceTree = "<group>"; };
 		737A7DE929EEF73F0036854E /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
+		7381CA2B29F6CFD5000B47A5 /* String+IconFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+IconFont.swift"; sourceTree = "<group>"; };
+		7381CA2F29F6D7C5000B47A5 /* UIImageView+IconFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+IconFont.swift"; sourceTree = "<group>"; };
+		7381CA3129F6DAA1000B47A5 /* UILabel+IconFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+IconFont.swift"; sourceTree = "<group>"; };
+		7381CA3329F6DAE0000B47A5 /* UIButton+IconFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+IconFont.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +74,7 @@
 				737A7DE529EEF73F0036854E /* FontLoader.swift */,
 				737A7DE629EEF73F0036854E /* ALIconFont.swift */,
 				737A7DE929EEF73F0036854E /* Types.swift */,
+				7381CA2B29F6CFD5000B47A5 /* String+IconFont.swift */,
 			);
 			path = ALIconFont;
 			sourceTree = "<group>";
@@ -74,6 +83,9 @@
 			isa = PBXGroup;
 			children = (
 				737A7DE429EEF73F0036854E /* UIImage+IconFont.swift */,
+				7381CA2F29F6D7C5000B47A5 /* UIImageView+IconFont.swift */,
+				7381CA3129F6DAA1000B47A5 /* UILabel+IconFont.swift */,
+				7381CA3329F6DAE0000B47A5 /* UIButton+IconFont.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -164,11 +176,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7381CA3429F6DAE0000B47A5 /* UIButton+IconFont.swift in Sources */,
 				737A7DED29EEF73F0036854E /* NSImage+IconFont.swift in Sources */,
 				737A7DEC29EEF73F0036854E /* ALIconFont.swift in Sources */,
+				7381CA3229F6DAA1000B47A5 /* UILabel+IconFont.swift in Sources */,
 				737A7DEA29EEF73F0036854E /* UIImage+IconFont.swift in Sources */,
+				7381CA3029F6D7C5000B47A5 /* UIImageView+IconFont.swift in Sources */,
 				737A7DEE29EEF73F0036854E /* Types.swift in Sources */,
 				737A7DEB29EEF73F0036854E /* FontLoader.swift in Sources */,
+				7381CA2C29F6CFD5000B47A5 /* String+IconFont.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

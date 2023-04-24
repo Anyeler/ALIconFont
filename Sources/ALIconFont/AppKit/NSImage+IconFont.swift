@@ -12,10 +12,10 @@ import CoreGraphics
 
 extension NSImage {
     
-    convenience init(from fontName: String, code: String, textColor: Color = .black, backgroundColor: Color = .clear, size: CGSize, fontPath: URL? = nil) {
+    convenience init(fontName: String, code: String, color: Color = .black, backgroundColor: Color = .clear, size: CGSize, fontPath: URL? = nil) {
         
         if
-            let image = NSImage.Icon(from: fontName, code: code, textColor: textColor, backgroundColor: backgroundColor, size: size, fontPath: fontPath),
+            let image = NSImage.icon(fontName: fontName, code: code, color: color, backgroundColor: backgroundColor, size: size, fontPath: fontPath),
             let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil)
         {
             self.init(cgImage: cgImage, size: size)
@@ -24,19 +24,11 @@ extension NSImage {
         }
     }
     
-    static func Icon(from fontName: String, code: String, textColor: Color = .black, backgroundColor: Color = .clear, size: CGSize, fontPath: URL? = nil) -> NSImage? {
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .center
+    static func icon(fontName: String, code: String, color: Color = .black, backgroundColor: Color = .clear, size: CGSize, fontPath: URL? = nil) -> NSImage? {
 
         let fontSize = min(size.width / 1.28571429, size.height)
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: Font.icon(from: fontName, ofSize: fontSize, fontPath: fontPath),
-            .foregroundColor: textColor,
-            .backgroundColor: backgroundColor,
-            .paragraphStyle: paragraphStyle
-        ]
         
-        let attributedString = NSAttributedString(string:code, attributes: attributes)
+        let attributedString = code.icon(fontName: fontName, color: color, backgroundColor: backgroundColor, fontSize: fontSize, fontPath: fontPath)
         
         let stringSize = attributedString.size()
         let image = NSImage(size: stringSize)
