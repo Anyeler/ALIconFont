@@ -16,14 +16,14 @@ import CoreText
 
 public struct FontLoader {
     
-    public static func loadFont(_ fontName: String, bundle: Bundle = .main) {
+    public static func loadFont(_ fontName: String, bundle: Bundle = .main) throws {
         guard let fileUrl = bundle.url(forResource: fontName, withExtension: "ttf") else {
-            return
+            throw NSError(domain: "[ALIconFont]: 没有找到 \(fontName).ttf 文件", code: 10001)
         }
-        self.loadFont(from: fileUrl)
+        try self.loadFont(from: fileUrl)
     }
     
-    public static func loadFont(from fontPath: URL) {
+    public static func loadFont(from fontPath: URL) throws {
         var error: Unmanaged<CFError>?
         guard
             !CTFontManagerRegisterFontsForURL(fontPath as NSURL, .process, &error),
@@ -32,33 +32,32 @@ public struct FontLoader {
 
             return
         }
-
-        let errorDescription: CFString = CFErrorCopyDescription(unwrappedError.takeUnretainedValue())
-
-        NSException(name: NSExceptionName.internalInconsistencyException,
-                    reason: errorDescription as String,
-                    userInfo: [NSUnderlyingErrorKey: nsError]).raise()
+        throw nsError
     }
 }
 
 public extension Font {
     #if os(iOS) || os(tvOS)
-    static func icon(from fontName: String, ofSize size: CGFloat, fontPath: URL? = nil) -> Font {
+    static func icon(from fontName: String, ofSize size: CGFloat, fontPath: URL? = nil) -> Font? {
         let fontNames = Font.fontNames(forFamilyName: fontName)
         if fontNames.contains(fontName) {
-            return Font(name: fontName, size: size)!
+            return Font(name: fontName, size: size)
         }
         guard let fontUrl = fontPath else {
-            FontLoader.loadFont(fontName)
-            return Font(name: fontName, size: size)!
+            try? FontLoader.loadFont(fontName)
+            return Font(name: fontName, size: size)
         }
-        FontLoader.loadFont(from: fontUrl)
-        return Font(name: fontName, size: size)!
+        try? FontLoader.loadFont(from: fontUrl)
+        return Font(name: fontName, size: size)
     }
     #elseif os(OSX)
-    static func icon(from fontName: String, ofSize size: CGFloat, fontPath: URL? = nil) -> Font {
-        FontLoader.loadFont(fontName)
-        return Font(name: fontName, size: size)!
+    static func icon(from fontName: String, ofSize size: CGFloat, fontPath: URL? = nil) -> Font? {
+        if let fontUrl = fontPath {
+            try? FontLoader.loadFont(from: fontUrl)
+        } else {
+            try? FontLoader.loadFont(fontName)
+        }
+        return Font(name: fontName, size: size)
     }
     #endif
 }

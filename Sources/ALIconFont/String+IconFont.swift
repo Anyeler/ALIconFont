@@ -13,13 +13,15 @@ import AppKit
 
 public extension String {
     
-    func icon(fontName: String, color: Color = .black, backgroundColor: Color = .clear, fontSize: CGFloat, fontPath: URL? = nil) -> NSMutableAttributedString {
+    func icon(fontName: String, color: Color = .black, backgroundColor: Color = .clear, fontSize: CGFloat, fontPath: URL? = nil) -> NSMutableAttributedString? {
+        
+        guard let font = Font.icon(from: fontName, ofSize: fontSize, fontPath: fontPath) else { return nil }
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
         
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: Font.icon(from: fontName, ofSize: fontSize, fontPath: fontPath),
+            .font: font,
             .foregroundColor: color,
             .backgroundColor: backgroundColor,
             .paragraphStyle: paragraphStyle
