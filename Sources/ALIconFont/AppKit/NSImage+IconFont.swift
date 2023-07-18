@@ -12,15 +12,12 @@ import CoreGraphics
 
 extension NSImage {
     
-    convenience init(fontName: String, code: String, color: Color = .black, backgroundColor: Color = .clear, size: CGSize, fontPath: URL? = nil) {
-        
-        if
-            let image = NSImage.icon(fontName: fontName, code: code, color: color, backgroundColor: backgroundColor, size: size, fontPath: fontPath),
-            let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil)
+    convenience init?(fontName: String, code: String, color: Color = .black, backgroundColor: Color = .clear, size: CGSize, fontPath: URL? = nil) {
+        if let image = NSImage.icon(fontName: fontName, code: code, color: color, backgroundColor: backgroundColor, size: size, fontPath: fontPath), let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil)
         {
             self.init(cgImage: cgImage, size: size)
         } else {
-            self.init()
+            return nil
         }
     }
     
@@ -28,7 +25,9 @@ extension NSImage {
 
         let fontSize = min(size.width / 1.28571429, size.height)
         
-        let attributedString = code.icon(fontName: fontName, color: color, backgroundColor: backgroundColor, fontSize: fontSize, fontPath: fontPath)
+        guard let attributedString = code.icon(fontName: fontName, color: color, backgroundColor: backgroundColor, fontSize: fontSize, fontPath: fontPath) else {
+            return nil
+        }
         
         let stringSize = attributedString.size()
         let image = NSImage(size: stringSize)
