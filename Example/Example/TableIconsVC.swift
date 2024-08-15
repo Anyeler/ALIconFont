@@ -8,6 +8,10 @@
 import UIKit
 import ALIconFont
 
+enum skyLineIcon: Int {
+    case icon_attention = 0xe73d
+}
+
 public class TableIconsVC: UITableViewController {
     
     let icons: [Icon] = [
@@ -47,6 +51,9 @@ public class TableIconsVC: UITableViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        let one = IconEn.one
+        let code = IconCode.Type
+        print("\(code)")
     }
     
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
